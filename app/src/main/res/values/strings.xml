@@ -1,4 +1,19 @@
 <resources>
     <string name="app_name">SaveThat</string>
+    <string name="company_image">Graphical representation of company</string>
+    <string name="coupon_image">Graphical rep. of the proposed deal</string> <!-- May not use this, may just use company image instead -->
+    <string name="save_error">Unable to save current coupon</string>
+    <string name="skip_error">Unable to skip current coupon</string>
+    <string name="hint_swipe_right">Swipe right to save the coupon</string>
+    <string name="hint_swipe_left">Swipe left to skip the coupon</string>
+    <string name="hint_save_button">Press this to save the coupon</string>
+    <string name="hint_skip_button">Press this to skip the coupon</string>
+    <string name="save_success">Coupon saved!</string>
+    <string name="skip_success">Coupon skipped!</string>
+
+    <!-- Menu strings? -->
+    <string name="profile" translatable="false">%s</string> <!-- Should be updated based on whether you are logged in or not -->
+    <string name="saved_list">Coupons</string>
     <string name="action_settings">Settings</string>
+
 </resources>

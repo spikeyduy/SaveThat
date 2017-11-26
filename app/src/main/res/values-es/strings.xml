@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SaveThat</string>
+    <string name="company_image">Representación gráfica de la empresa</string>
+    <string name="coupon_image">Representación gráfica del acuerdo propuesto</string>
+    <string name="save_error">No se puede guardar el cupón actual</string>
+    <string name="skip_error">No se puede saltear el cupón actual</string>
+    <string name="hint_swipe_right">Desliza el dedo hacia la derecha para guardar el cupón</string>
+    <string name="hint_swipe_left">Desliza hacia la izquierda para saltar el cupón</string>
+    <string name="hint_save_button">Presiona esto para guardar el cupón</string>
+    <string name="hint_skip_button">Presiona esto para saltarte el cupón</string>
+    <string name="saved_list">Cupones</string>
+    <string name="action_settings">Configuraciones</string>
+    <string name="save_success">¡Cupón ahorrado!</string>
+    <string name="skip_success">¡Cupón salteado!</string>
+</resources>
