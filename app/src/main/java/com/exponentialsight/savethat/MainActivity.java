@@ -1,8 +1,10 @@
 package com.exponentialsight.savethat;
 
+import android.content.res.Configuration;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -15,9 +17,10 @@ import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String[] mSideMenu;
-    private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
+    private String[] mSideMenu; // drawer menu items
+    private DrawerLayout mDrawerLayout; // drawer layout
+    private ListView mDrawerList; // list inside of drawer
+    private ActionBarDrawerToggle mDrawerToggle; // toggle for hamburg menu icon
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        // setting up drawer icon
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer);
+
 
         // TODO start up with either the signup layout or main depending on if user is logged in or not
         // Set up the main swipe fragment
@@ -36,18 +45,43 @@ public class MainActivity extends AppCompatActivity {
         mSideMenu = getResources().getStringArray(R.array.side_settings);
         mDrawerLayout = findViewById(R.id.drawer_layout);
         mDrawerList = findViewById(R.id.left_drawer);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
+            // called when the drawer has been completely closed
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+            }
+
+            public void onDrawerOpened(View view) {
+                super.onDrawerOpened(view);
+            }
+        };
+        mDrawerLayout.addDrawerListener(mDrawerToggle);
 
         // set the adapter for the list view
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_item, mSideMenu));
+        mDrawerList.setAdapter(new ArrayAdapter<>(this, R.layout.drawer_item, mSideMenu));
         // set up the list's listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
     }
 
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // sync the toggle state after onRestoreInstanceState has occurred
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
     // drawer listener
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
 
+        // TODO make the back action close the navigation instead of quiting the app
+        // TODO may have to make each fragment be children to the mainSwipeFrag so that the back button can go there instead of just exiting
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //            Log.d("DRAWER", "onItemClick POSITION: " + position);

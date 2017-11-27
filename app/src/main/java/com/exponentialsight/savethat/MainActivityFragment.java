@@ -27,7 +27,6 @@ import butterknife.OnClick;
  */
 public class MainActivityFragment extends Fragment {
 
-    private final String TAG = "SwipeActivity";
     private ImageView image; // image for the coupon
     private ArrayList<String> couponList; // list of available coupons
     @InjectView(R.id.frame) SwipeFlingAdapterView flingContainer;
@@ -63,18 +62,9 @@ public class MainActivityFragment extends Fragment {
         couponList.add("BUY ONE GET ONE FREE");
         couponList.add("BUY ONE GET SECOND 50% OFF");
 
-        // Could also just make the coupon list require name then deal to be added
-//        nameList = new ArrayList<>();
-//        nameList.add("BestBuy");
-//        nameList.add("ChipChip");
-//        nameList.add("Kaceys");
-
-        // make the buttons visualize the press action
-//        Button skipButton = view.findViewById(R.id.skip_button);
 
         // create an array adapter
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), R.layout.coupons_holder, R.id.helloText, couponList);
-//        final ArrayAdapter<String> nameArrAdapter = new ArrayAdapter<>(getContext(), R.layout.coupons_holder, R.id.nameTextView, nameList);
 
         flingContainer.setAdapter(arrayAdapter);
         flingContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
@@ -82,9 +72,7 @@ public class MainActivityFragment extends Fragment {
             public void removeFirstObjectInAdapter() {
                 Log.d("List","removed object");
                 couponList.remove(0);
-//                nameList.remove(0);
                 arrayAdapter.notifyDataSetChanged();
-//                nameArrAdapter.notifyDataSetChanged();
             }
 
             @Override
