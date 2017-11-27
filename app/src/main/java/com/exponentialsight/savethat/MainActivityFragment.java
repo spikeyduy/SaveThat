@@ -29,8 +29,6 @@ public class MainActivityFragment extends Fragment {
 
     private final String TAG = "SwipeActivity";
     private ImageView image; // image for the coupon
-    private Button buttonSkip; // button to skip
-    private Button buttonSave; // button to save
     private ArrayList<String> couponList; // list of available coupons
     @InjectView(R.id.frame) SwipeFlingAdapterView flingContainer;
     private int cards;
@@ -57,10 +55,6 @@ public class MainActivityFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         // butterknife is used to instantiate views instead of calling "findViewById()"
         ButterKnife.inject(this,view);
-
-
-        buttonSkip = view.findViewById(R.id.skip_button);
-        buttonSave = view.findViewById(R.id.save_button);
 
         couponList = new ArrayList<>();
 //        couponList.add("BestBuy");

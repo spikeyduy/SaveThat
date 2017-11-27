@@ -1,24 +1,37 @@
 package com.exponentialsight.savethat;
 
+import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
+
+    private String[] mSideMenu;
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // TODO need to specify new fragment and then use fragment manager to input it into the content_frame
+        // Set up the main swipe fragment
+        MainActivityFragment fragment = new MainActivityFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_replace, fragment).commit();
+
+        // set up drawer
+        mSideMenu = getResources().getStringArray(R.array.side_settings);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
     }
 
 //    @Override
