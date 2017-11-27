@@ -15,7 +15,11 @@
 
     <!-- Menu strings? -->
     <string name="profile" translatable="false">%s</string> <!-- Should be updated based on whether you are logged in or not -->
-    <string name="saved_list">Coupons</string>
+    <string name="saved_list">Saved Coupons</string>
     <string name="action_settings">Settings</string>
+    <string name="feedback">Send Feedback</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
