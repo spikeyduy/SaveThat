@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -28,8 +29,8 @@ public class MainActivityFragment extends Fragment {
 
     private final String TAG = "SwipeActivity";
     private ImageView image; // image for the coupon
-    private FloatingActionButton fabSkip; // button to skip
-    private FloatingActionButton fabSave; // button to save
+    private Button buttonSkip; // button to skip
+    private Button buttonSave; // button to save
     private ArrayList<String> couponList; // list of available coupons
     @InjectView(R.id.frame) SwipeFlingAdapterView flingContainer;
     private int cards;
@@ -38,7 +39,7 @@ public class MainActivityFragment extends Fragment {
     public MainActivityFragment() {
     }
 
-    @OnClick(R.id.save_fab)
+    @OnClick(R.id.save_button)
     public void swipeRight() {
         /*
         * Call the swipe right action manually
@@ -46,7 +47,7 @@ public class MainActivityFragment extends Fragment {
         flingContainer.getTopCardListener().selectRight();
     }
 
-    @OnClick(R.id.skip_fab)
+    @OnClick(R.id.skip_button)
     public void swipeLeft() {
         flingContainer.getTopCardListener().selectLeft();
     }
@@ -58,8 +59,8 @@ public class MainActivityFragment extends Fragment {
         ButterKnife.inject(this,view);
 
 
-        fabSkip = view.findViewById(R.id.skip_fab);
-        fabSave = view.findViewById(R.id.save_fab);
+        buttonSkip = view.findViewById(R.id.skip_button);
+        buttonSave = view.findViewById(R.id.save_button);
 
         couponList = new ArrayList<>();
 //        couponList.add("BestBuy");

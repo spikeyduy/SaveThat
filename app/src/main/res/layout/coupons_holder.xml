@@ -8,22 +8,12 @@
     android:background="@drawable/round_framelayout">
 
     <ImageView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:src="@drawable/chipchip"
         android:scaleType="centerCrop"
+        android:background="@drawable/round_framelayout"
         />
-    <!-- Need another textView for the name of the company at the top-->
-    <!--<TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/nameTextView"
-        android:textSize="45sp"
-        android:textStyle="bold"
-        android:gravity="top"
-        android:textColor="@android:color/white"
-        android:shadowColor="#000"
-        android:shadowRadius="4"/>-->
     <!-- Need to either set a limit on the # of chars or to have it -->
     <TextView
         android:layout_width="match_parent"

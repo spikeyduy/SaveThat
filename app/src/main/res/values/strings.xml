@@ -10,6 +10,8 @@
     <string name="hint_skip_button">Press this to skip the coupon</string>
     <string name="save_success">Coupon saved!</string>
     <string name="skip_success">Coupon skipped!</string>
+    <string name="skip">Skip</string>
+    <string name="save">Save</string>
 
     <!-- Menu strings? -->
     <string name="profile" translatable="false">%s</string> <!-- Should be updated based on whether you are logged in or not -->
