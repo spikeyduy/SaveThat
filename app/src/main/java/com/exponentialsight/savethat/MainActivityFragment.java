@@ -18,6 +18,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 
 /**
@@ -31,9 +32,23 @@ public class MainActivityFragment extends Fragment {
     private FloatingActionButton fabSave; // button to save
     private ArrayList<String> couponList; // list of available coupons
     @InjectView(R.id.frame) SwipeFlingAdapterView flingContainer;
-    private int i;
+    private int cards;
+//    private ArrayList<String> nameList; // name of the companies
 
     public MainActivityFragment() {
+    }
+
+    @OnClick(R.id.save_fab)
+    public void swipeRight() {
+        /*
+        * Call the swipe right action manually
+        */
+        flingContainer.getTopCardListener().selectRight();
+    }
+
+    @OnClick(R.id.skip_fab)
+    public void swipeLeft() {
+        flingContainer.getTopCardListener().selectLeft();
     }
 
     @Override
@@ -42,18 +57,25 @@ public class MainActivityFragment extends Fragment {
         // butterknife is used to instantiate views instead of calling "findViewById()"
         ButterKnife.inject(this,view);
 
+
         fabSkip = view.findViewById(R.id.skip_fab);
         fabSave = view.findViewById(R.id.save_fab);
 
-
-        // TODO example on how to use flingContainer
         couponList = new ArrayList<>();
-        couponList.add("php");
-        couponList.add("bestBuy");
-        couponList.add("work");
+//        couponList.add("BestBuy");
+        couponList.add("50% OFF");
+        couponList.add("BUY ONE GET ONE FREE");
+        couponList.add("BUY ONE GET SECOND 50% OFF");
+
+        // Could also just make the coupon list require name then deal to be added
+//        nameList = new ArrayList<>();
+//        nameList.add("BestBuy");
+//        nameList.add("ChipChip");
+//        nameList.add("Kaceys");
 
         // create an array adapter
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), R.layout.coupons_holder, R.id.helloText, couponList);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), R.layout.coupons_holder, R.id.helloText, couponList);
+//        final ArrayAdapter<String> nameArrAdapter = new ArrayAdapter<>(getContext(), R.layout.coupons_holder, R.id.nameTextView, nameList);
 
         flingContainer.setAdapter(arrayAdapter);
         flingContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
@@ -61,7 +83,9 @@ public class MainActivityFragment extends Fragment {
             public void removeFirstObjectInAdapter() {
                 Log.d("List","removed object");
                 couponList.remove(0);
+//                nameList.remove(0);
                 arrayAdapter.notifyDataSetChanged();
+//                nameArrAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -80,22 +104,21 @@ public class MainActivityFragment extends Fragment {
             @Override
             public void onAdapterAboutToEmpty(int i) {
                 // ask for more data here
-                couponList.add("XML ".concat(String.valueOf(i)));
+                couponList.add("Coupon ".concat(String.valueOf(cards)));
                 arrayAdapter.notifyDataSetChanged();
-                Log.d("LIST","notified");
-                i++;
+                Log.d("LIST","notified i: " + cards);
+                cards++;
             }
 
             @Override
             public void onScroll(float v) {
-                View view =flingContainer.getSelectedView();
-                view.findViewById(R.id.item_swipe_right_indicator).setAlpha(v < 0 ? -v : 0);
-                view.findViewById(R.id.item_swipe_left_indicator).setAlpha(v > 0 ? v : 0);
+//                View view =flingContainer.getSelectedView();
+//                view.findViewById(R.id.item_swipe_right_indicator).setAlpha(v < 0 ? -v : 0);
+//                view.findViewById(R.id.item_swipe_left_indicator).setAlpha(v > 0 ? v : 0);
             }
         });
 
-        // TODO set onclicklistener for fab 
-
         return view;
     }
+
 }

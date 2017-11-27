@@ -1,32 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="250dp" android:layout_height="300dp"
-    android:layout_gravity="center">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="16dp"
+    android:layout_gravity="center"
+    android:background="@drawable/round_framelayout">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/chipchip"
+        android:scaleType="centerCrop"
+        />
+    <!-- Need another textView for the name of the company at the top-->
+    <!--<TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/nameTextView"
+        android:textSize="45sp"
+        android:textStyle="bold"
+        android:gravity="top"
+        android:textColor="@android:color/white"
+        android:shadowColor="#000"
+        android:shadowRadius="4"/>-->
+    <!-- Need to either set a limit on the # of chars or to have it -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/helloText"
-        android:textSize="40sp"
+        android:textSize="45sp"
         android:textColor="@android:color/white"
+        android:shadowColor="#000000"
+        android:shadowRadius="16"
+        android:textStyle="bold"
         android:text="@string/company_image"
-        android:gravity="center"
-        android:background="#E339"/>
+        android:gravity="bottom" />
 
+    <!-- alpha is a little square indicator that shows which direction is being swiped -->
     <View
         android:id="@+id/item_swipe_left_indicator"
-        android:alpha="0"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_margin="10dp"
-        android:background="#A5F" />
+        android:layout_gravity="start" />
 
     <View
         android:id="@+id/item_swipe_right_indicator"
-        android:alpha="0"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_margin="10dp"
-        android:layout_gravity="right"
-        android:background="#5AF" />
+        android:layout_gravity="end" />
 </FrameLayout>
