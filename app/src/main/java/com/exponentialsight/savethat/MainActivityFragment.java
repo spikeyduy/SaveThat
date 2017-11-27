@@ -56,6 +56,7 @@ public class MainActivityFragment extends Fragment {
         // butterknife is used to instantiate views instead of calling "findViewById()"
         ButterKnife.inject(this,view);
 
+        // TODO add coupons through the database
         couponList = new ArrayList<>();
 //        couponList.add("BestBuy");
         couponList.add("50% OFF");
@@ -67,6 +68,9 @@ public class MainActivityFragment extends Fragment {
 //        nameList.add("BestBuy");
 //        nameList.add("ChipChip");
 //        nameList.add("Kaceys");
+
+        // make the buttons visualize the press action
+//        Button skipButton = view.findViewById(R.id.skip_button);
 
         // create an array adapter
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), R.layout.coupons_holder, R.id.helloText, couponList);

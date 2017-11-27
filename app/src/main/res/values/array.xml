@@ -2,6 +2,7 @@
 <resources>
     <string-array name="side_settings">
         <item name="profile">Profile</item>
+        <item name="main">Home</item>
         <item name="saved_list">Saved Coupons</item>
         <item name="action_settings">Settings</item>
         <item name="feedback">Send Feedback</item>
