@@ -1,5 +1,6 @@
 package com.exponentialsight.savethat;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         // Set up the main swipe fragment
         MainActivityFragment fragment = new MainActivityFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_replace, fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.content_replace, fragment,"1").commit();
 
         // set up drawer
         mSideMenu = getResources().getStringArray(R.array.side_settings);
@@ -75,6 +76,22 @@ public class MainActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
+
+    // go back through backstackFrags
+    @Override
+    public void onBackPressed(){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        if (fragmentManager.getBackStackEntryCount() > 0) {
+            Log.i("MainFrag","Popping backstack");
+            fragmentManager.popBackStack();
+            int i = fragmentManager.getBackStackEntryCount()-1;
+            String tag = fragmentManager.getBackStackEntryAt(i).getName();
+            setTitle(mSideMenu[Integer.parseInt(tag)]);
+        } else {
+            Log.i("MainFrag","Nothing on backstack, calling super");
+            super.onBackPressed();
+        }
+    }
     // drawer listener
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
 
@@ -88,38 +105,42 @@ public class MainActivity extends AppCompatActivity {
             switch (position) {
                 case 0:
                     // profile
+                    LoginActivity loginActivity = new LoginActivity();
+                    Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+                    startActivity(intent);
                     break;
                 case 1:
                     // home
                     MainActivityFragment fragmentMain = new MainActivityFragment();
-                    fragmentManager.beginTransaction().replace(R.id.content_replace, fragmentMain).commit();
+                    fragmentManager.beginTransaction().replace(R.id.content_replace, fragmentMain,"1").addToBackStack("1").commit();
                     setTitle(R.string.app_name);
                     mDrawerLayout.closeDrawer(mDrawerList);
                     break;
                 case 2:
                     // saved coupons
                     SavedCouponsFragment fragmentSaved = new SavedCouponsFragment();
-                    fragmentManager.beginTransaction().replace(R.id.content_replace, fragmentSaved).commit();
-                    setTitle(mSideMenu[position]);
+                    fragmentManager.beginTransaction().replace(R.id.content_replace, fragmentSaved,"2").addToBackStack("2").commit();
+                    Log.i("SavedFrag","SavedFrag tag: " + fragmentSaved.getTag());
+                    setTitle(mSideMenu[2]);
                     mDrawerLayout.closeDrawer(mDrawerList);
                     break;
                 case 3:
                     // settings
                     SettingsFragment fragmentSettings = new SettingsFragment();
-                    fragmentManager.beginTransaction().replace(R.id.content_replace, fragmentSettings).commit();
+                    fragmentManager.beginTransaction().replace(R.id.content_replace, fragmentSettings,"3").addToBackStack("3").commit();
                     setTitle(mSideMenu[position]);
                     mDrawerLayout.closeDrawer(mDrawerList);
                     break;
                 case 4:
                     // send feedback
                     FeedbackFragment fragmentFeedback = new FeedbackFragment();
-                    fragmentManager.beginTransaction().replace(R.id.content_replace, fragmentFeedback).commit();
+                    fragmentManager.beginTransaction().replace(R.id.content_replace, fragmentFeedback,"4").addToBackStack("4").commit();
                     setTitle(mSideMenu[position]);
                     mDrawerLayout.closeDrawer(mDrawerList);
                     break;
                 default:
                     fragmentMain = new MainActivityFragment();
-                    fragmentManager.beginTransaction().replace(R.id.content_replace, fragmentMain).commit();
+                    fragmentManager.beginTransaction().replace(R.id.content_replace, fragmentMain,"1").addToBackStack("1").commit();
                     setTitle(R.string.app_name);
                     mDrawerLayout.closeDrawer(mDrawerList);
                     break;
