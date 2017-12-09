@@ -2,6 +2,8 @@ package com.exponentialsight.savethat;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.support.v17.leanback.app.BaseSupportFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         // Set up the main swipe fragment
         MainActivityFragment fragment = new MainActivityFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_replace, fragment,"1").commit();
+        fragmentManager.beginTransaction().replace(R.id.content_replace, fragment,"1").addToBackStack("1").commit();
 
         // set up drawer
         mSideMenu = getResources().getStringArray(R.array.side_settings);
@@ -81,30 +83,58 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         FragmentManager fragmentManager = getSupportFragmentManager();
-        if (fragmentManager.getBackStackEntryCount() > 0) {
-            Log.i("MainFrag","Popping backstack");
-            fragmentManager.popBackStack();
-            int i = fragmentManager.getBackStackEntryCount()-1;
-            String tag = fragmentManager.getBackStackEntryAt(i).getName();
-            setTitle(mSideMenu[Integer.parseInt(tag)]);
-        } else {
-            Log.i("MainFrag","Nothing on backstack, calling super");
+        if (fragmentManager.getBackStackEntryCount() == 0) {
             super.onBackPressed();
+        } else {
+            //            Log.i("MainFrag","Popping backstack");
+            fragmentManager.popBackStack();
+            // backstacklistener so that the UI can be updated if it gets popped
+            fragmentManager.addOnBackStackChangedListener(
+                    new FragmentManager.OnBackStackChangedListener() {
+                        @Override
+                        public void onBackStackChanged() {
+//                            Log.i("BACK","BACKSTACK HAS CHANGED");
+                            String currTitle = getActiveFragmentTag();
+                            Log.i("TITLE","String: " + currTitle);
+                            if (currTitle != null) {
+                                changeTitle(currTitle);
+                            } else {
+                                System.exit(0);
+                            }
+                        }
+                    }
+            );
         }
     }
+
+    // helper function to return the current fragment
+    public String getActiveFragmentTag() {
+        FragmentManager fm = getSupportFragmentManager();
+        if (fm.getBackStackEntryCount() == 0) {
+            return null;
+        } else {
+            return fm.getBackStackEntryAt(fm.getBackStackEntryCount()-1).getName();
+        }
+    }
+
+    // helper function to change the title
+    public void changeTitle(String tag) {
+        int pos = Integer.parseInt(tag);
+        setTitle(mSideMenu[pos]);
+    }
+
     // drawer listener
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
 
-        // TODO make the back action close the navigation instead of quiting the app
-        // TODO may have to make each fragment be children to the mainSwipeFrag so that the back button can go there instead of just exiting
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //            Log.d("DRAWER", "onItemClick POSITION: " + position);
             switch (position) {
                 case 0:
                     // profile
+                    // TODO fix login / implement google
                     LoginActivity loginActivity = new LoginActivity();
                     Intent intent = new Intent(getBaseContext(), LoginActivity.class);
                     startActivity(intent);
