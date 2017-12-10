@@ -18,6 +18,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+
 public class MainActivity extends AppCompatActivity {
 
     private String[] mSideMenu; // drawer menu items
@@ -39,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         // TODO start up with either the signup layout or main depending on if user is logged in or not
+        // TODO have the signin be an activity that user cannot access sidebar until logged in
         // Set up the main swipe fragment
         MainActivityFragment fragment = new MainActivityFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -134,13 +138,14 @@ public class MainActivity extends AppCompatActivity {
             switch (position) {
                 case 0:
                     // profile
-                    // TODO fix login / implement google
+                    // TODO MAKE IT SO THAT THIS ALSO HAS A BURGER ICON
                     LoginActivity loginActivity = new LoginActivity();
                     Intent intent = new Intent(getBaseContext(), LoginActivity.class);
                     startActivity(intent);
                     break;
                 case 1:
                     // home
+                    // TODO need to make user is logged on before displaying this
                     MainActivityFragment fragmentMain = new MainActivityFragment();
                     fragmentManager.beginTransaction().replace(R.id.content_replace, fragmentMain,"1").addToBackStack("1").commit();
                     setTitle(R.string.app_name);

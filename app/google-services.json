@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "666745426344",
+    "project_id": "save-that"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:666745426344:android:7973075c6336d06d",
+        "android_client_info": {
+          "package_name": "com.exponentialsight.savethat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "666745426344-c2060jiipqte80lrvkb2a836pnia5lfv.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "666745426344-h1ohk2ncteqftr2ddqn8e59cvevc9oje.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.exponentialsight.savethat",
+            "certificate_hash": "5d34b5410d840029fe8b5ea0a4681b956d3c281c"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA469--qLLZ9fqzuGhoGrEMScSyaGYrYQU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
