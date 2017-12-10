@@ -66,6 +66,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             findViewById(R.id.signOut_and_disconnect).setVisibility(View.VISIBLE);
 
             userName.setText(getString(R.string.signed_in_fmt, gsa.getDisplayName()));
+            // need to convert into a fragment?
+            MainActivity mainActivity = new MainActivity();
+            Intent intent = new Intent(getBaseContext(), mainActivity.getClass());
+            startActivity(intent);
         } else {
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
             findViewById(R.id.signOut_and_disconnect).setVisibility(View.GONE);
