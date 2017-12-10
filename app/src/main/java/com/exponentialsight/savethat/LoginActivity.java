@@ -1,9 +1,7 @@
 package com.exponentialsight.savethat;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -16,7 +14,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 /**
@@ -25,7 +22,6 @@ import com.google.android.gms.tasks.Task;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "LogInActivity";
-    private SignInButton signInButton;
     private static final int RC_SIGN_IN = 9001;
     private GoogleSignInClient mGoogleSignInClient;
     private TextView userName;
@@ -42,12 +38,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         findViewById(R.id.sign_in_button).setOnClickListener(this);
-        findViewById(R.id.sign_out_button).setOnClickListener(this);
-        findViewById(R.id.disconnect_button).setOnClickListener(this);
-
-        signInButton = findViewById(R.id.sign_in_button);
-        signInButton.setSize(SignInButton.SIZE_WIDE);
         userName = findViewById(R.id.name);
+
+        SignInButton signInButton = findViewById(R.id.sign_in_button);
+        signInButton.setSize(SignInButton.SIZE_WIDE);
     }
 
     @Override
@@ -60,19 +54,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public void updateUI(@Nullable GoogleSignInAccount gsa) {
         if (gsa != null) {
-            // hide the sign in button and display profile
-//            Log.i(TAG,"THERE IS A USER SIGNED IN");
-            signInButton.setVisibility(View.GONE);
-            findViewById(R.id.signOut_and_disconnect).setVisibility(View.VISIBLE);
-
-            userName.setText(getString(R.string.signed_in_fmt, gsa.getDisplayName()));
-            // need to convert into a fragment?
             MainActivity mainActivity = new MainActivity();
             Intent intent = new Intent(getBaseContext(), mainActivity.getClass());
             startActivity(intent);
         } else {
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-            findViewById(R.id.signOut_and_disconnect).setVisibility(View.GONE);
             userName.setText(R.string.signed_out);
         }
     }
@@ -80,24 +66,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
-
-    private void signOut() {
-        mGoogleSignInClient.signOut().addOnCompleteListener(this, new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                updateUI(null);
-            }
-        });
-    }
-
-    private void disconnect() {
-        mGoogleSignInClient.revokeAccess().addOnCompleteListener(this, new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                updateUI(null);
-            }
-        });
     }
 
     @Override
@@ -124,17 +92,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.sign_in_button:
-                signIn();
-                break;
-            case R.id.sign_out_button:
-                signOut();
-                break;
-            case R.id.disconnect_button:
-                disconnect();
-                break;
-        }
+        signIn();
     }
 }
 

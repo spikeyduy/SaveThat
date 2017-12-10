@@ -2,19 +2,15 @@ package com.exponentialsight.savethat;
 
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.support.annotation.Nullable;
-import android.support.v17.leanback.app.BaseSupportFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -28,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout; // drawer layout
     private ListView mDrawerList; // list inside of drawer
     private ActionBarDrawerToggle mDrawerToggle; // toggle for hamburg menu icon
-    private GoogleSignInAccount account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +37,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer);
 
-        // TODO start up with either the signup layout or main depending on if user is logged in or not
-        // TODO have the signin be an activity that user cannot access sidebar until logged in
-        // Set up the main swipe fragmen
-        // SHOULD PROBABLY START OFF WITH PROFILE FRAG SO IT SEEMS MORE SEAMLESS
         MainActivityFragment fragment = new MainActivityFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_replace, fragment,"1").addToBackStack("1").commit();
@@ -75,13 +66,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        account = GoogleSignIn.getLastSignedInAccount(this);
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         startUI(account);
     }
 
     public void startUI(@Nullable GoogleSignInAccount gsa) {
         if (gsa == null) {
-            LoginActivity loginActivity = new LoginActivity();
             Intent intent = new Intent(getBaseContext(), LoginActivity.class);
             startActivity(intent);
         }
@@ -155,14 +145,12 @@ public class MainActivity extends AppCompatActivity {
             switch (position) {
                 case 0:
                     // profile
-                    // TODO MAKE IT SO THAT THIS ALSO HAS A BURGER ICON
                     ProfileFragment fragmentProfile = new ProfileFragment();
                     fragmentManager.beginTransaction().replace(R.id.content_replace,fragmentProfile,"0").addToBackStack("0").commit();
                     setTitle(mSideMenu[position]);
                     break;
                 case 1:
                     // home
-                    // TODO need to make user is logged on before displaying this
                     MainActivityFragment fragmentMain = new MainActivityFragment();
                     fragmentManager.beginTransaction().replace(R.id.content_replace, fragmentMain,"1").addToBackStack("1").commit();
                     setTitle(R.string.app_name);
@@ -198,27 +186,5 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
         }
-
     }
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-////        //noinspection SimplifiableIfStatement
-////        if (id == R.id.action_settings) {
-////            return true;
-////        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 }
