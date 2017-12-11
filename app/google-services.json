@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "666745426344",
+    "firebase_url": "https://save-that-c2f0f.firebaseio.com",
     "project_id": "save-that"
   },
   "client": [
@@ -13,6 +14,10 @@
       },
       "oauth_client": [
         {
+          "client_id": "666745426344-s8fucitntgpmhmhsvluh772pcdlsac97.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
           "client_id": "666745426344-c2060jiipqte80lrvkb2a836pnia5lfv.apps.googleusercontent.com",
           "client_type": 3
         },
@@ -22,6 +27,14 @@
           "android_info": {
             "package_name": "com.exponentialsight.savethat",
             "certificate_hash": "5d34b5410d840029fe8b5ea0a4681b956d3c281c"
+          }
+        },
+        {
+          "client_id": "666745426344-589gckulef0ae5bphd728q7cagn7em28.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.exponentialsight.savethat",
+            "certificate_hash": "5a983eb22e08a48631e09b67b194221deea71a18"
           }
         }
       ],
@@ -35,11 +48,16 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "666745426344-s8fucitntgpmhmhsvluh772pcdlsac97.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }

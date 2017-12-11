@@ -19,7 +19,7 @@ public interface CouponDao {
     List<CouponEntity> getAll();
 
     @Insert
-    void insertAll(CouponEntity... couponEntities);
+    public void addCoupon(CouponEntity... couponEntities);
 
     @Delete
     void delete(CouponEntity couponEntity);

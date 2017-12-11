@@ -4,9 +4,6 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-/**
- * Created by Spikes on 12/10/2017.
- */
 @Entity(tableName = "Coupons")
 class CouponEntity {
     @PrimaryKey(autoGenerate = true)
@@ -18,26 +15,39 @@ class CouponEntity {
     @ColumnInfo(name = "Company")
     public String companyName;
 
-    @ColumnInfo(name = "code")
+    @ColumnInfo(name = "Code")
     public String code;
 
+    CouponEntity(String deal, String company, String code) {
+        setDeal(deal);
+        setCompanyName(company);
+        setCode(code);
+    }
+
+    CouponEntity() {
+
+    }
+
+    public String toString(){
+        return deal;
+    }
     public int getId() {
         return id;
     }
 
-    public String getDeal() {
+    String getDeal() {
         return deal;
     }
 
-    public void setDeal(String deal) {
+    private void setDeal(String deal) {
         this.deal = deal;
     }
 
-    public String getCompanyName() {
+    String getCompanyName() {
         return companyName;
     }
 
-    public void setCompanyName(String companyName) {
+    private void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
 

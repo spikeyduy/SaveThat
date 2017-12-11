@@ -28,7 +28,7 @@ import butterknife.OnClick;
  */
 public class MainActivityFragment extends Fragment {
 
-    private ArrayList<Coupon> couponList; // list of available coupons
+    private ArrayList<CouponEntity> couponList; // list of available coupons
     @InjectView(R.id.frame) SwipeFlingAdapterView flingContainer;
     private int cards;
     SharedPreferences mPrefs;
@@ -50,6 +50,10 @@ public class MainActivityFragment extends Fragment {
         flingContainer.getTopCardListener().selectLeft();
     }
 
+    public void addCoupon(Coupon c) {
+
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
@@ -63,9 +67,9 @@ public class MainActivityFragment extends Fragment {
         // TODO add coupons through the database
         couponList = new ArrayList<>();
 //        couponList.add("BestBuy");
-        couponList.add(new Coupon("50% OFF","Chipotle","XXX"));
-        couponList.add(new Coupon("BUY ONE GET ONE FREE","Burger King","DXM"));
-        couponList.add(new Coupon("BUY ONE GET SECOND 50% OFF","Portillos","LSX"));
+        couponList.add(new CouponEntity("50% OFF","Chipotle","XXX"));
+        couponList.add(new CouponEntity("BUY ONE GET ONE FREE","Burger King","DXM"));
+        couponList.add(new CouponEntity("BUY ONE GET SECOND 50% OFF","Portillos","LSX"));
 
 
         // create an array adapter
@@ -95,16 +99,13 @@ public class MainActivityFragment extends Fragment {
                 // create a savedcouponsfrag then call it's arraylist and populate it with this? how to do user by user basis?
 //                String json = gson.toJson(o);
                 Toast.makeText(getContext(), "Swiped Right", Toast.LENGTH_SHORT).show();
-//                editor.putString("Coupon", json);
-//                editor.apply();
-//                String testJ = mPrefs.getString("Coupon", "");
-//                Log.i("SAVING COUP", testJ);
+
             }
 
             @Override
             public void onAdapterAboutToEmpty(int i) {
                 // ask for more data here
-                couponList.add(new Coupon("Coupon ".concat(String.valueOf(cards)), "Company", "MMM"));
+                couponList.add(new CouponEntity("Coupon ".concat(String.valueOf(cards)), "Company", "MMM"));
                 arrayAdapter.notifyDataSetChanged();
                 Log.d("LIST","notified i: " + cards);
                 cards++;

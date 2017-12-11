@@ -10,11 +10,11 @@ import java.util.ArrayList;
  * Created by Spikes on 12/10/2017.
  */
 
-public class CouponArrayAdapter extends ArrayAdapter<Coupon>{
+public class CouponArrayAdapter extends ArrayAdapter<CouponEntity>{
 
-    ArrayList<Coupon> couponList = new ArrayList<>();
+    ArrayList<CouponEntity> couponList = new ArrayList<>();
 
-    public CouponArrayAdapter(@NonNull Context context, int resource, int textString, ArrayList<Coupon> cList) {
+    public CouponArrayAdapter(@NonNull Context context, int resource, int textString, ArrayList<CouponEntity> cList) {
         super(context, resource, textString, cList);
         couponList = cList;
     }
