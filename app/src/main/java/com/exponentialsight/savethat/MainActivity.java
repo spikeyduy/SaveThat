@@ -1,6 +1,7 @@
 package com.exponentialsight.savethat;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,12 +19,16 @@ import android.widget.ListView;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private String[] mSideMenu; // drawer menu items
     private DrawerLayout mDrawerLayout; // drawer layout
     private ListView mDrawerList; // list inside of drawer
     private ActionBarDrawerToggle mDrawerToggle; // toggle for hamburg menu icon
+    public static final String PREFS_NAME = "SavedPrefs";
+    private ArrayList<Coupon> userCouponArray; // users' couponsList
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
         MainActivityFragment fragment = new MainActivityFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_replace, fragment,"1").addToBackStack("1").commit();
+
+        // set up saved preferences to keep track of user's coupons
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = preferences.edit();
 
         // set up drawer
         mSideMenu = getResources().getStringArray(R.array.side_settings);

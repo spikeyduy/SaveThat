@@ -1,6 +1,9 @@
 package com.exponentialsight.savethat;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -10,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.ArrayList;
@@ -27,6 +31,8 @@ public class MainActivityFragment extends Fragment {
     private ArrayList<Coupon> couponList; // list of available coupons
     @InjectView(R.id.frame) SwipeFlingAdapterView flingContainer;
     private int cards;
+    SharedPreferences mPrefs;
+    Gson gson;
 
     public MainActivityFragment() {
     }
@@ -49,6 +55,10 @@ public class MainActivityFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         // butterknife is used to instantiate views instead of calling "findViewById()"
         ButterKnife.inject(this,view);
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(this.getContext());
+        final SharedPreferences.Editor editor = mPrefs.edit();
+        gson = new Gson();
+
 
         // TODO add coupons through the database
         couponList = new ArrayList<>();
@@ -83,8 +93,12 @@ public class MainActivityFragment extends Fragment {
                 // TODO make the dataObj be saved to saved
                 // if the object is a coupon, just add that directly to an arraylist and then deal with it in the savedcoupons fragment
                 // create a savedcouponsfrag then call it's arraylist and populate it with this? how to do user by user basis?
+//                String json = gson.toJson(o);
                 Toast.makeText(getContext(), "Swiped Right", Toast.LENGTH_SHORT).show();
-
+//                editor.putString("Coupon", json);
+//                editor.apply();
+//                String testJ = mPrefs.getString("Coupon", "");
+//                Log.i("SAVING COUP", testJ);
             }
 
             @Override
