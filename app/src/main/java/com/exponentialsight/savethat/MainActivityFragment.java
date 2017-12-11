@@ -1,8 +1,9 @@
 package com.exponentialsight.savethat;
 
+import android.arch.persistence.room.Room;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -10,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -33,6 +33,8 @@ public class MainActivityFragment extends Fragment {
     private int cards;
     SharedPreferences mPrefs;
     Gson gson;
+    private AppDatabase dbb;
+    private CouponDao couponObj;
 
     public MainActivityFragment() {
     }
@@ -45,14 +47,15 @@ public class MainActivityFragment extends Fragment {
         flingContainer.getTopCardListener().selectRight();
     }
 
+    public void addCoupon(Object c) {
+        dbb.couponDao().addCoupon((CouponEntity) c);
+    }
+
     @OnClick(R.id.skip_button)
     public void swipeLeft() {
         flingContainer.getTopCardListener().selectLeft();
     }
 
-    public void addCoupon(Coupon c) {
-
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,13 +66,16 @@ public class MainActivityFragment extends Fragment {
         final SharedPreferences.Editor editor = mPrefs.edit();
         gson = new Gson();
 
+        dbb = Room.databaseBuilder(getContext().getApplicationContext(), AppDatabase.class, "couponDB").allowMainThreadQueries().fallbackToDestructiveMigration().build();
 
         // TODO add coupons through the database
         couponList = new ArrayList<>();
 //        couponList.add("BestBuy");
+        CouponEntity cTest = new CouponEntity("100% Discount", "Long John Silvers", "RCG");
         couponList.add(new CouponEntity("50% OFF","Chipotle","XXX"));
         couponList.add(new CouponEntity("BUY ONE GET ONE FREE","Burger King","DXM"));
         couponList.add(new CouponEntity("BUY ONE GET SECOND 50% OFF","Portillos","LSX"));
+        addCoupon(cTest);
 
 
         // create an array adapter
@@ -99,7 +105,8 @@ public class MainActivityFragment extends Fragment {
                 // create a savedcouponsfrag then call it's arraylist and populate it with this? how to do user by user basis?
 //                String json = gson.toJson(o);
                 Toast.makeText(getContext(), "Swiped Right", Toast.LENGTH_SHORT).show();
-
+                dbb.couponDao().addCoupon((CouponEntity) o);
+                Log.i("TAG", "this is the house"  + dbb.couponDao().getAll().get(dbb.couponDao().getAll().size()-1) );
             }
 
             @Override
@@ -122,4 +129,11 @@ public class MainActivityFragment extends Fragment {
         return view;
     }
 
+    private class DatabaseAsync extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            return null;
+        }
+    }
 }

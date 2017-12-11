@@ -29,8 +29,6 @@ public class MainActivity extends AppCompatActivity {
     private ListView mDrawerList; // list inside of drawer
     private ActionBarDrawerToggle mDrawerToggle; // toggle for hamburg menu icon
     public static final String PREFS_NAME = "SavedPrefs";
-    private ArrayList<Coupon> userCouponArray; // users' couponsList
-    AppDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +45,6 @@ public class MainActivity extends AppCompatActivity {
         MainActivityFragment fragment = new MainActivityFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_replace, fragment,"1").addToBackStack("1").commit();
-
-        // set up database
-        db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "Coupon-Database").build();
-
 
         // set up drawer
         mSideMenu = getResources().getStringArray(R.array.side_settings);

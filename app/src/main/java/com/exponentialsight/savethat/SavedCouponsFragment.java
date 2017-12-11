@@ -1,5 +1,6 @@
 package com.exponentialsight.savethat;
 
+import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -26,6 +27,8 @@ public class SavedCouponsFragment extends Fragment {
     private static final String TAG = "SavedCoupons";
     private ArrayList<Coupon> couponArrayList;
     private SharedPreferences mPrefs;
+    private AppDatabase dbb;
+    private ListView listView;
 
     public SavedCouponsFragment() {
         // Required empty public constructor
@@ -38,6 +41,11 @@ public class SavedCouponsFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_saved_coupons, container, false);
 
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this.getContext());
+        // TODO FIX THIS YOU SHOULD NOT BE DOING THIS
+        dbb = Room.databaseBuilder(getContext().getApplicationContext(), AppDatabase.class, "couponDB").allowMainThreadQueries().fallbackToDestructiveMigration().build();
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(getContext(), android.R.layout.simple_list_item_1, dbb.couponDao().getAllDeals(), new String[] { "Deal" }, new int[] { android.R.id.text1});
+        listView = view.findViewById(R.id.listView);
+        listView.setAdapter(adapter);
 
         return view;
     }

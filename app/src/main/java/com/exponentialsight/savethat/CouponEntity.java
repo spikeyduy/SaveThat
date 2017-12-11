@@ -7,7 +7,8 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity(tableName = "Coupons")
 class CouponEntity {
     @PrimaryKey(autoGenerate = true)
-    public int id;
+    @ColumnInfo(name = "_id")
+    public int _id;
 
     @ColumnInfo(name = "Deal")
     public String deal;
@@ -32,7 +33,7 @@ class CouponEntity {
         return deal;
     }
     public int getId() {
-        return id;
+        return _id;
     }
 
     String getDeal() {

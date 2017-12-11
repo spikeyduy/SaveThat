@@ -18,6 +18,15 @@ public interface CouponDao {
     @Query("SELECT * FROM Coupons")
     List<CouponEntity> getAll();
 
+    @Query("SELECT Deal, _id FROM Coupons")
+    Cursor getAllDeals();
+
+    @Query("SELECT Company FROM Coupons")
+    List<String> getAllCompany();
+
+    @Query("SELECT Code FROM Coupons")
+    List<String> getAllCode();
+
     @Insert
     public void addCoupon(CouponEntity... couponEntities);
 
@@ -25,5 +34,5 @@ public interface CouponDao {
     void delete(CouponEntity couponEntity);
 
     @Query("SELECT * FROM Coupons")
-    Cursor getCursorAll();
+    public CouponEntity[] getAllCoupons();
 }
