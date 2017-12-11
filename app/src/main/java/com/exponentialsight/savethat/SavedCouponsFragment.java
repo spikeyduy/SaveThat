@@ -29,6 +29,7 @@ public class SavedCouponsFragment extends Fragment {
     private SharedPreferences mPrefs;
     private AppDatabase dbb;
     private ListView listView;
+    public static SimpleCursorAdapter adapter;
 
     public SavedCouponsFragment() {
         // Required empty public constructor
@@ -43,11 +44,18 @@ public class SavedCouponsFragment extends Fragment {
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this.getContext());
         // TODO FIX THIS YOU SHOULD NOT BE DOING THIS
         dbb = Room.databaseBuilder(getContext().getApplicationContext(), AppDatabase.class, "couponDB").allowMainThreadQueries().fallbackToDestructiveMigration().build();
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(getContext(), android.R.layout.simple_list_item_1, dbb.couponDao().getAllDeals(), new String[] { "Deal" }, new int[] { android.R.id.text1});
+        adapter = new SimpleCursorAdapter(getContext(), android.R.layout.simple_list_item_1, dbb.couponDao().getAllCompany(), new String[]{"Company"}, new int[]{android.R.id.text1});
         listView = view.findViewById(R.id.listView);
         listView.setAdapter(adapter);
+//        adapter.notifyDataSetChanged();
 
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.notifyDataSetChanged();
     }
 
 }

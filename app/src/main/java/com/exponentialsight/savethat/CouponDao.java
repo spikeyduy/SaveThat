@@ -21,8 +21,8 @@ public interface CouponDao {
     @Query("SELECT Deal, _id FROM Coupons")
     Cursor getAllDeals();
 
-    @Query("SELECT Company FROM Coupons")
-    List<String> getAllCompany();
+    @Query("SELECT Company, _id FROM Coupons")
+    Cursor getAllCompany();
 
     @Query("SELECT Code FROM Coupons")
     List<String> getAllCode();

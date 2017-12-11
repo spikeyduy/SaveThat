@@ -29,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
     private ListView mDrawerList; // list inside of drawer
     private ActionBarDrawerToggle mDrawerToggle; // toggle for hamburg menu icon
     public static final String PREFS_NAME = "SavedPrefs";
+    MainActivityFragment fragmentMain;
+    SettingsFragment fragmentSettings;
+    SavedCouponsFragment fragmentSaved;
+    ProfileFragment fragmentProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,11 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer);
+
+        fragmentMain = new MainActivityFragment();
+        fragmentSettings = new SettingsFragment();
+        fragmentSaved = new SavedCouponsFragment();
+        fragmentProfile = new ProfileFragment();
 
         MainActivityFragment fragment = new MainActivityFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -151,21 +160,18 @@ public class MainActivity extends AppCompatActivity {
             switch (position) {
                 case 0:
                     // profile
-                    ProfileFragment fragmentProfile = new ProfileFragment();
                     fragmentManager.beginTransaction().replace(R.id.content_replace,fragmentProfile,"0").addToBackStack("0").commit();
                     setTitle(mSideMenu[position]);
                     mDrawerLayout.closeDrawer(mDrawerList);
                     break;
                 case 1:
                     // home
-                    MainActivityFragment fragmentMain = new MainActivityFragment();
                     fragmentManager.beginTransaction().replace(R.id.content_replace, fragmentMain,"1").addToBackStack("1").commit();
                     setTitle(R.string.app_name);
                     mDrawerLayout.closeDrawer(mDrawerList);
                     break;
                 case 2:
                     // saved coupons
-                    SavedCouponsFragment fragmentSaved = new SavedCouponsFragment();
                     fragmentManager.beginTransaction().replace(R.id.content_replace, fragmentSaved,"2").addToBackStack("2").commit();
                     Log.i("SavedFrag","SavedFrag tag: " + fragmentSaved.getTag());
                     setTitle(mSideMenu[2]);
@@ -173,13 +179,11 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 3:
                     // settings
-                    SettingsFragment fragmentSettings = new SettingsFragment();
                     fragmentManager.beginTransaction().replace(R.id.content_replace, fragmentSettings,"3").addToBackStack("3").commit();
                     setTitle(mSideMenu[position]);
                     mDrawerLayout.closeDrawer(mDrawerList);
                     break;
                 default:
-                    fragmentMain = new MainActivityFragment();
                     fragmentManager.beginTransaction().replace(R.id.content_replace, fragmentMain,"1").addToBackStack("1").commit();
                     setTitle(R.string.app_name);
                     mDrawerLayout.closeDrawer(mDrawerList);

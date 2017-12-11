@@ -28,6 +28,8 @@ import butterknife.OnClick;
  */
 public class MainActivityFragment extends Fragment {
 
+    public SavedCouponsFragment fragmentSaved;
+
     private ArrayList<CouponEntity> couponList; // list of available coupons
     @InjectView(R.id.frame) SwipeFlingAdapterView flingContainer;
     private int cards;
@@ -37,6 +39,11 @@ public class MainActivityFragment extends Fragment {
     private CouponDao couponObj;
 
     public MainActivityFragment() {
+    }
+
+
+    public void dataChanged() {
+        fragmentSaved.adapter.notifyDataSetChanged();
     }
 
     @OnClick(R.id.save_button)
@@ -65,6 +72,8 @@ public class MainActivityFragment extends Fragment {
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this.getContext());
         final SharedPreferences.Editor editor = mPrefs.edit();
         gson = new Gson();
+
+        fragmentSaved = new SavedCouponsFragment();
 
         dbb = Room.databaseBuilder(getContext().getApplicationContext(), AppDatabase.class, "couponDB").allowMainThreadQueries().fallbackToDestructiveMigration().build();
 
@@ -106,7 +115,8 @@ public class MainActivityFragment extends Fragment {
 //                String json = gson.toJson(o);
                 Toast.makeText(getContext(), "Swiped Right", Toast.LENGTH_SHORT).show();
                 dbb.couponDao().addCoupon((CouponEntity) o);
-                Log.i("TAG", "this is the house"  + dbb.couponDao().getAll().get(dbb.couponDao().getAll().size()-1) );
+                Log.i("TAG", "this is the house"  + dbb.couponDao().getAll().size() );
+//                dataChanged();
             }
 
             @Override
