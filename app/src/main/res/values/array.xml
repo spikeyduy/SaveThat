@@ -5,6 +5,5 @@
         <item name="main">Home</item>
         <item name="saved_list">Saved Coupons</item>
         <item name="action_settings">Settings</item>
-        <item name="feedback">Send Feedback</item>
     </string-array>
 </resources>

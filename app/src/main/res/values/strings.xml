@@ -42,4 +42,5 @@
     <string name="signed_out">Signed Out</string>
     <string name="disconnect_account">Disconnect Account</string>
     <string name="sign_out">Sign out</string>
+    <string name="swipe_to_save_coupons">Swipe to save coupons!</string>
 </resources>

@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         mDrawerList.setAdapter(new ArrayAdapter<>(this, R.layout.drawer_item, mSideMenu));
         // set up the list's listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+
     }
 
     @Override
@@ -148,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
                     ProfileFragment fragmentProfile = new ProfileFragment();
                     fragmentManager.beginTransaction().replace(R.id.content_replace,fragmentProfile,"0").addToBackStack("0").commit();
                     setTitle(mSideMenu[position]);
+                    mDrawerLayout.closeDrawer(mDrawerList);
                     break;
                 case 1:
                     // home
@@ -168,13 +170,6 @@ public class MainActivity extends AppCompatActivity {
                     // settings
                     SettingsFragment fragmentSettings = new SettingsFragment();
                     fragmentManager.beginTransaction().replace(R.id.content_replace, fragmentSettings,"3").addToBackStack("3").commit();
-                    setTitle(mSideMenu[position]);
-                    mDrawerLayout.closeDrawer(mDrawerList);
-                    break;
-                case 4:
-                    // send feedback
-                    FeedbackFragment fragmentFeedback = new FeedbackFragment();
-                    fragmentManager.beginTransaction().replace(R.id.content_replace, fragmentFeedback,"4").addToBackStack("4").commit();
                     setTitle(mSideMenu[position]);
                     mDrawerLayout.closeDrawer(mDrawerList);
                     break;

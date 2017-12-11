@@ -24,10 +24,9 @@ import butterknife.OnClick;
  */
 public class MainActivityFragment extends Fragment {
 
-    private ArrayList<String> couponList; // list of available coupons
+    private ArrayList<Coupon> couponList; // list of available coupons
     @InjectView(R.id.frame) SwipeFlingAdapterView flingContainer;
     private int cards;
-//    private ArrayList<String> nameList; // name of the companies
 
     public MainActivityFragment() {
     }
@@ -54,13 +53,13 @@ public class MainActivityFragment extends Fragment {
         // TODO add coupons through the database
         couponList = new ArrayList<>();
 //        couponList.add("BestBuy");
-        couponList.add("50% OFF");
-        couponList.add("BUY ONE GET ONE FREE");
-        couponList.add("BUY ONE GET SECOND 50% OFF");
+        couponList.add(new Coupon("50% OFF","Chipotle","XXX"));
+        couponList.add(new Coupon("BUY ONE GET ONE FREE","Burger King","DXM"));
+        couponList.add(new Coupon("BUY ONE GET SECOND 50% OFF","Portillos","LSX"));
 
 
         // create an array adapter
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), R.layout.coupons_holder, R.id.helloText, couponList);
+        final CouponArrayAdapter arrayAdapter = new CouponArrayAdapter(getContext(), R.layout.coupons_holder, R.id.helloText, couponList);
 
         flingContainer.setAdapter(arrayAdapter);
         flingContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
@@ -76,18 +75,22 @@ public class MainActivityFragment extends Fragment {
                 // do something on the left
                 // need access to original object
                 // to use: cast object to string (String) dataObj
-                Toast.makeText(getContext(), "Swiped Left", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), o.toString(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onRightCardExit(Object o) {
+                // TODO make the dataObj be saved to saved
+                // if the object is a coupon, just add that directly to an arraylist and then deal with it in the savedcoupons fragment
+                // create a savedcouponsfrag then call it's arraylist and populate it with this? how to do user by user basis?
                 Toast.makeText(getContext(), "Swiped Right", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
             public void onAdapterAboutToEmpty(int i) {
                 // ask for more data here
-                couponList.add("Coupon ".concat(String.valueOf(cards)));
+                couponList.add(new Coupon("Coupon ".concat(String.valueOf(cards)), "Company", "MMM"));
                 arrayAdapter.notifyDataSetChanged();
                 Log.d("LIST","notified i: " + cards);
                 cards++;
