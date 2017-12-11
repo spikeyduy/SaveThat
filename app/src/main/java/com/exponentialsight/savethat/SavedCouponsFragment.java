@@ -44,7 +44,7 @@ public class SavedCouponsFragment extends Fragment {
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this.getContext());
         // TODO FIX THIS YOU SHOULD NOT BE DOING THIS
         dbb = Room.databaseBuilder(getContext().getApplicationContext(), AppDatabase.class, "couponDB").allowMainThreadQueries().fallbackToDestructiveMigration().build();
-        adapter = new SimpleCursorAdapter(getContext(), android.R.layout.simple_list_item_1, dbb.couponDao().getAllCompany(), new String[]{"Company"}, new int[]{android.R.id.text1});
+        adapter = new SimpleCursorAdapter(getContext(), R.layout.saved_coupons_list, dbb.couponDao().getAll(), new String[]{"Deal", "Company", "Code"}, new int[]{R.id.deal, R.id.company, R.id.code});
         listView = view.findViewById(R.id.listView);
         listView.setAdapter(adapter);
 //        adapter.notifyDataSetChanged();

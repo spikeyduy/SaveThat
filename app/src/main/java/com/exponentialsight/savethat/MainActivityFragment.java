@@ -115,7 +115,7 @@ public class MainActivityFragment extends Fragment {
 //                String json = gson.toJson(o);
                 Toast.makeText(getContext(), "Swiped Right", Toast.LENGTH_SHORT).show();
                 dbb.couponDao().addCoupon((CouponEntity) o);
-                Log.i("TAG", "this is the house"  + dbb.couponDao().getAll().size() );
+                Log.i("TAG", "this is the house"  + dbb.couponDao().getAll().getCount());
 //                dataChanged();
             }
 

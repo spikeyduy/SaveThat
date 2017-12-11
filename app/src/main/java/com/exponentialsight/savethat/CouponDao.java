@@ -15,8 +15,8 @@ import java.util.List;
 
 @Dao
 public interface CouponDao {
-    @Query("SELECT * FROM Coupons")
-    List<CouponEntity> getAll();
+    @Query("SELECT Deal, Company, Code, _id FROM Coupons")
+    Cursor getAll();
 
     @Query("SELECT Deal, _id FROM Coupons")
     Cursor getAllDeals();
