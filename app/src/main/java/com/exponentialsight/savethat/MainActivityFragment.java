@@ -84,7 +84,7 @@ public class MainActivityFragment extends Fragment {
         couponList.add(new CouponEntity("50% OFF","Chipotle","XXX"));
         couponList.add(new CouponEntity("BUY ONE GET ONE FREE","Burger King","DXM"));
         couponList.add(new CouponEntity("BUY ONE GET SECOND 50% OFF","Portillos","LSX"));
-        addCoupon(cTest);
+//        addCoupon(cTest);
 
 
         // create an array adapter
@@ -104,18 +104,17 @@ public class MainActivityFragment extends Fragment {
                 // do something on the left
                 // need access to original object
                 // to use: cast object to string (String) dataObj
-                Toast.makeText(getContext(), o.toString(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), o.toString(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onRightCardExit(Object o) {
-                // TODO make the dataObj be saved to saved
                 // if the object is a coupon, just add that directly to an arraylist and then deal with it in the savedcoupons fragment
                 // create a savedcouponsfrag then call it's arraylist and populate it with this? how to do user by user basis?
 //                String json = gson.toJson(o);
-                Toast.makeText(getContext(), "Swiped Right", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Swiped Right", Toast.LENGTH_SHORT).show();
                 dbb.couponDao().addCoupon((CouponEntity) o);
-                Log.i("TAG", "this is the house"  + dbb.couponDao().getAll().getCount());
+//                Log.i("TAG", "this is the house"  + dbb.couponDao().getAll().getCount());
 //                dataChanged();
             }
 
