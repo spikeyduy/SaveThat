@@ -1,15 +1,12 @@
 package com.exponentialsight.savethat;
 
-        import android.arch.persistence.room.Database;
-        import android.arch.persistence.room.Room;
-        import android.arch.persistence.room.RoomDatabase;
-        import android.content.Context;
+import android.arch.persistence.room.Database;
+import android.arch.persistence.room.Room;
+import android.arch.persistence.room.RoomDatabase;
+import android.content.Context;
 
-/**
- * Created by Spikes on 12/10/2017.
- */
 
-@Database(entities = CouponEntity.class, version = 2)
+@Database(entities = CouponEntity.class, version = 3)
 public abstract class AppDatabase extends RoomDatabase {
 
     public static volatile AppDatabase INSTANCE;
