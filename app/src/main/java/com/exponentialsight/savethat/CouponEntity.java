@@ -19,10 +19,14 @@ class CouponEntity {
     @ColumnInfo(name = "Code")
     public String code;
 
-    CouponEntity(String deal, String company, String code) {
+    @ColumnInfo(name = "Time")
+    public int time;
+
+    CouponEntity(String deal, String company, String code, int time) {
         setDeal(deal);
         setCompanyName(company);
         setCode(code);
+        setTime(time);
     }
 
     CouponEntity() {
@@ -58,5 +62,12 @@ class CouponEntity {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public int getTime() {
+        return time;
+    }
+    public void setTime(int time) {
+        this.time = time;
     }
 }

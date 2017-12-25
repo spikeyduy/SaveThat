@@ -80,10 +80,10 @@ public class MainActivityFragment extends Fragment {
         // TODO add coupons through the database
         couponList = new ArrayList<>();
 //        couponList.add("BestBuy");
-        CouponEntity cTest = new CouponEntity("100% Discount", "Long John Silvers", "RCG");
-        couponList.add(new CouponEntity("50% OFF","Chipotle","XXX"));
-        couponList.add(new CouponEntity("BUY ONE GET ONE FREE","Burger King","DXM"));
-        couponList.add(new CouponEntity("BUY ONE GET SECOND 50% OFF","Portillos","LSX"));
+        CouponEntity cTest = new CouponEntity("100% Discount", "Long John Silvers", "RCG",2);
+        couponList.add(new CouponEntity("50% OFF","Chipotle","XXX",2));
+        couponList.add(new CouponEntity("BUY ONE GET ONE FREE","Burger King","DXM",3));
+        couponList.add(new CouponEntity("BUY ONE GET SECOND 50% OFF","Portillos","LSX",5));
 //        addCoupon(cTest);
 
 
@@ -121,7 +121,7 @@ public class MainActivityFragment extends Fragment {
             @Override
             public void onAdapterAboutToEmpty(int i) {
                 // ask for more data here
-                couponList.add(new CouponEntity("Coupon ".concat(String.valueOf(cards)), "Company", "MMM"));
+                couponList.add(new CouponEntity("Coupon ".concat(String.valueOf(cards)), "Company", "MMM",10));
                 arrayAdapter.notifyDataSetChanged();
                 Log.d("LIST","notified i: " + cards);
                 cards++;

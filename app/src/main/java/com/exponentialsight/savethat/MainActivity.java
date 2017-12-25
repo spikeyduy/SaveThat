@@ -115,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
             //            Log.i("MainFrag","Popping backstack");
             fragmentManager.popBackStack();
             // backstacklistener so that the UI can be updated if it gets popped
+            // TODO FRAGMENT ON RESUME AND THEN CALL THE ACTIVE FRAGAMENT THAT WAY
             fragmentManager.addOnBackStackChangedListener(
                     new FragmentManager.OnBackStackChangedListener() {
                         @Override

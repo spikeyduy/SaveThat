@@ -25,7 +25,6 @@ import java.util.ArrayList;
 public class SavedCouponsFragment extends Fragment {
 
     private static final String TAG = "SavedCoupons";
-    private ArrayList<Coupon> couponArrayList;
     private SharedPreferences mPrefs;
     private AppDatabase dbb;
     private ListView listView;
